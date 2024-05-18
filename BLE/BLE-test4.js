@@ -361,7 +361,7 @@ function convertAndFormatData(value) {
 
 // Function to send data to the Bluetooth device
 async function sendBluetoothData(data) {
-    
+    /*
     //  const command = 'SG10K'; 
         const command = data;
         // Convert data to ArrayBuffer
@@ -372,8 +372,8 @@ async function sendBluetoothData(data) {
 
         await RX_characteristic.writeValueWithoutResponse(dataView);
         console.log("Sent data to Bluetooth: " + command);
+    */
     
-    /*
     try {
         if (!TX_characteristic) {
             console.error("Bluetooth TX_characteristic not available.");
@@ -397,7 +397,7 @@ async function sendBluetoothData(data) {
         console.error('Failed to send command', error);
         console.error('Error message:', error.message);
         console.error('Error code:', error.code);
-    }*/
+    }
 }
 
 // Function to start scanning for BLE devices
