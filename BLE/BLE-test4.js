@@ -8,6 +8,7 @@ import{butterworthLowpassFilter,findPeaks,diff_Peaks} from './Gait.js';
 import { barProgress,barIntialiaze } from "../bar_walking/bar.js";
 import { getCurrentTimeString,graph,sendParameter} from "../timer/timer.js";
 import StepDetector from './Gait.js';
+
 //import { onSnapshot } from "firebase/firestore";
 //import { query } from "firebase/database";
 //import {training_session} from '../taskCompletion/taskCompletion.js';
@@ -182,7 +183,7 @@ var totalDistance_Sum=0;
 const sampleRate = 20; // 采样率为 20 Hz
 const cutoffFreq = 4; // 截止频率为 50 Hz
 
-//  结果显示的变量 设置
+// html 结果显示的变量 设置
 const resultDisplay=document.getElementById('stepCount');
 
 
@@ -360,10 +361,26 @@ function convertAndFormatData(value) {
 
 // Function to send data to the Bluetooth device
 async function sendBluetoothData(data) {
+    
+    //  const command = 'SG10K'; 
+        const command = data;
+        // Convert data to ArrayBuffer
+        //let buffer = new ArrayBuffer(1); // Assuming 1 byte of data
+        const encoder = new TextEncoder();
+        let dataView = encoder.encode(command);
+        
+
+        await RX_characteristic.writeValueWithoutResponse(dataView);
+        console.log("Sent data to Bluetooth: " + command);
+    
+    /*
     try {
         if (!TX_characteristic) {
             console.error("Bluetooth TX_characteristic not available.");
             return;
+        if(TX_characteristic){
+            console.log("TX")
+        }
         }
         //const command = 'SG10K'; 
         const command = data;
@@ -374,16 +391,17 @@ async function sendBluetoothData(data) {
         
 
         await RX_characteristic.writeValueWithoutResponse(dataView);
-        console.log("Sent data to Bluetooth: " + command);
-    } catch (error) {
+        console.log("Sent data to Bluetooth: " + command);}
+        
+    catch (error) {
         console.error('Failed to send command', error);
         console.error('Error message:', error.message);
         console.error('Error code:', error.code);
-    }
+    }*/
 }
 
 // Function to start scanning for BLE devices
-async function startScan() {
+export async function startScan() {
     try {
         const device = await navigator.bluetooth.requestDevice({
             acceptAllDevices: true,
@@ -431,19 +449,20 @@ var diffMean1_filtered;
 var cnt_values=[];
 
 // 播放节奏函数
-function playRhythm() {
+export function playRhythm() {
     // 检测步态
         // 播放音乐
         var player = document.getElementById("audio");
         document.getElementById("steps_number").textContent=steps_A;
         player.play();
         sendBluetoothData("SBPOK");
+        console.log("SBPOK");
         
 }
 
 function IMUprocess(data){
     const database=getDatabase();
-    const tempo_sign=document.getElementById('buttonTempo').textContent
+    //const tempo_sign=document.getElementById('buttonTempo').textContent
     const preMag=[];
     const postMag=[];
 
@@ -627,8 +646,10 @@ function IMUprocess(data){
                         if(j>0){
                             index_diff=index[j-1]-index[j-2];
                             
+                            
                         
                             if(index_diff>5){
+                                
                                 playRhythm();
                                 steps_index.push(i);
                                 steps_values.push(Magnitude[i]);
@@ -820,12 +841,16 @@ document.getElementById("endButton").addEventListener("click",function(){
     
     endTime=new Date();
     duration=(endTime-startTime);//duration calculate in minute
-    barProgress(startTime,endTime,duration,steps,fileName,username,date,time,steps_A,processSnapshots=0);
+    const durationMinutes = Math.floor(duration / 60000); // 将持续时间转换为分钟
+    const durationSeconds = ((duration % 60000) / 1000).toFixed(0); // 计算持续时间的剩余秒数并四舍五入
+    const cadence=steps/((durationMinutes*60)+durationSeconds);
+    barProgress(startTime,endTime,duration,steps,fileName,username,date,time,steps_A,processSnapshots=0,durationMinutes,durationSeconds,cadence);
     intializeData();
+    /*
     if(isPlaying){
         isPlaying=false;
     }
-   
+   */
 });
 
 //模拟用户登入状态
@@ -844,7 +869,7 @@ function updateLoginStatus(){
   } else {
     // 如果用户未登录，则按钮文本为Visitor
     loginName.textContent = "未登入";
-    window.location.href = "login.html"
+    window.location.href = "login/login.html"
     logBtn.textContent="登入"
   }
 }
@@ -852,7 +877,7 @@ function updateLoginStatus(){
 
 document.getElementById('logBtn').addEventListener('click', function() {
     if(logBtn.textContent==="登入"){
-        window.location.href = "login.html"
+        window.location.href = "login/login.html"
     }else{
         localStorage.removeItem('username')
         alert('成功退出');
@@ -865,9 +890,9 @@ document.getElementById('logBtn').addEventListener('click', function() {
 
 document.getElementById('profileBtn').addEventListener('click',function(){
     if(isLoggedIn){
-        window.location.href = "profile.html"
+        window.location.href = "profile/profile.html"
     }else{
-        window.location.href = "login.html"
+        window.location.href = "login/login.html"
     }
 })
 
