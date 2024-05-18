@@ -1,3 +1,4 @@
+import {playRhythm} from "../BLE/BLE-test4.js";
 let tempoInterval;
 let isPlaying = false;
 
@@ -5,6 +6,8 @@ function playSound() {
   const audio = document.getElementById('audio');
   audio.currentTime = 0;
   audio.play();
+  //sendBluetoothData("SBPOK");
+  playRhythm();
 }
 
 function startTempo() {
@@ -14,12 +17,12 @@ function startTempo() {
     const tempo = tempoSlider.value;
     const interval = (60 / tempo) * 1000; // Interval in milliseconds
     tempoInterval = setInterval(playSound, interval);
-    document.getElementById('buttonTempo').textContent = 'auto';
+    //document.getElementById('buttonTempo').textContent = 'auto';
     //buttonTempo.addEventListener('click', toggleButtonText);
 }else{
   isPlaying = false;
   clearInterval(tempoInterval);
-  document.getElementById('buttonTempo').textContent = 'manual';
+  //document.getElementById('buttonTempo').textContent = 'manual';
 
     }
 }
@@ -46,12 +49,17 @@ window.addEventListener('beforeunload', function() {
   }
 });
 
-document.getElementById("endButton").addEventListener("click",function(){
+document.getElementById("stoptempo").addEventListener("click",function(){
   //endTimer();// 显示表的结束
   if(isPlaying){
       isPlaying=false;
       clearInterval(tempoInterval);
-      document.getElementById('buttonTempo').textContent = 'manual';
+      //document.getElementById('buttonTempo').textContent = 'manual';
   }
  
 });
+
+document.getElementById("starttempo").addEventListener("click",function(){
+  startTempo();
+  console.log("click start")
+})
