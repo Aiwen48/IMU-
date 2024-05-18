@@ -869,7 +869,7 @@ function updateLoginStatus(){
   } else {
     // 如果用户未登录，则按钮文本为Visitor
     loginName.textContent = "未登入";
-    window.location.href = "login/login.html"
+    window.location.href = "login.html"
     logBtn.textContent="登入"
   }
 }
@@ -877,7 +877,7 @@ function updateLoginStatus(){
 
 document.getElementById('logBtn').addEventListener('click', function() {
     if(logBtn.textContent==="登入"){
-        window.location.href = "login/login.html"
+        window.location.href = "login.html"
     }else{
         localStorage.removeItem('username')
         alert('成功退出');
@@ -890,9 +890,9 @@ document.getElementById('logBtn').addEventListener('click', function() {
 
 document.getElementById('profileBtn').addEventListener('click',function(){
     if(isLoggedIn){
-        window.location.href = "profile/profile.html"
+        window.location.href = "profile.html"
     }else{
-        window.location.href = "login/login.html"
+        window.location.href = "login.html"
     }
 })
 
