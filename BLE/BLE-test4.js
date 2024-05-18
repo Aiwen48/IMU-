@@ -626,10 +626,10 @@ function IMUprocess(data){
                         index.push(i);}
                         if(j>0){
                             index_diff=index[j-1]-index[j-2];
-                            playRhythm();
+                            
                         
-                            if(index_diff>8){
-                                
+                            if(index_diff>5){
+                                playRhythm();
                                 steps_index.push(i);
                                 steps_values.push(Magnitude[i]);
                                 steps_A++;
