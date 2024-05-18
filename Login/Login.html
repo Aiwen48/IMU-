@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="Login.css">
+<link rel="stylesheet" href="Login/Login.css">
 <title>Login Page</title>
 <style>
 /* 登录表单样式 */
@@ -36,7 +36,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     localStorage.setItem('username',username);
     localStorage.setItem('password',password);
     alert("登录成功！欢迎您，" + username + "！");
-    window.location.href = "../../test1.html"; // 登录成功后跳转回首页
+    window.location.href = "test1.html"; // 登录成功后跳转回首页
   } else {
     alert("登录失败，请输入有效的用户名和密码。");
   }
