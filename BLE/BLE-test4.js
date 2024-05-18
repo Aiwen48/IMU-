@@ -182,7 +182,7 @@ var totalDistance_Sum=0;
 const sampleRate = 20; // 采样率为 20 Hz
 const cutoffFreq = 4; // 截止频率为 50 Hz
 
-// html 结果显示的变量 设置
+//  结果显示的变量 设置
 const resultDisplay=document.getElementById('stepCount');
 
 
@@ -844,7 +844,7 @@ function updateLoginStatus(){
   } else {
     // 如果用户未登录，则按钮文本为Visitor
     loginName.textContent = "未登入";
-    window.location.href = "login/login.html"
+    window.location.href = "login.html"
     logBtn.textContent="登入"
   }
 }
@@ -852,7 +852,7 @@ function updateLoginStatus(){
 
 document.getElementById('logBtn').addEventListener('click', function() {
     if(logBtn.textContent==="登入"){
-        window.location.href = "login/login.html"
+        window.location.href = "login.html"
     }else{
         localStorage.removeItem('username')
         alert('成功退出');
@@ -867,7 +867,7 @@ document.getElementById('profileBtn').addEventListener('click',function(){
     if(isLoggedIn){
         window.location.href = "profile/profile.html"
     }else{
-        window.location.href = "login/login.html"
+        window.location.href = "login.html"
     }
 })
 
