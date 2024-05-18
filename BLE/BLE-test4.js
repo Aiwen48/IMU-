@@ -865,7 +865,7 @@ document.getElementById('logBtn').addEventListener('click', function() {
 
 document.getElementById('profileBtn').addEventListener('click',function(){
     if(isLoggedIn){
-        window.location.href = "profile/profile.html"
+        window.location.href = "profile.html"
     }else{
         window.location.href = "login.html"
     }
