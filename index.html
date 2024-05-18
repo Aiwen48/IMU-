@@ -134,8 +134,11 @@
         
         <input type="range" min="40" max="200" value="120" class="tempo-slider" id="tempoSlider">
         <label for="tempoSlider">Tempo: <span id="tempoValue">120</span> BPM</label>
-        
-        <button class="button-tempo" id="buttonTempo" onclick="startTempo()">manual</button>
+        <!--<button id="startButton" onclick="startTempo()">Start Tempo</button>
+        <button id="stopButton" onclick="stopTempo()" style="display: none;">Stop Tempo</button>
+        <button class="button-tempo" id="buttonTempo">manual</button>-->
+        <button id="starttempo" >Start Tempo</button>
+        <button id="stoptempo" style="display: none;">Stop Tempo</button>
        
     </div>
 
@@ -202,7 +205,7 @@
     <script src="BLE/Gait.js" type=module></script>
     <script src="bar_walking/bar.js" type=module></script>
     <script src="test1.js" type=module></script>
-    <script src="tempo/tempo.js"></script>
+    <script src="tempo/tempo.js" type=module></script>
     <script src="bar_walking/bar.js" type=module></script></script>
     <script src="taskCompletion/taskCompletion.js" type=module> </script>
     <script src="timer/timer.js" type=module> </script>
